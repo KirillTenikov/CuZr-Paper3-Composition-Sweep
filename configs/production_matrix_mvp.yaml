@@ -1,0 +1,39 @@
+project: CuZr-Paper3-Composition-Sweep
+paper: paper3
+
+external_infrastructure:
+  dockerfile_repository: https://github.com/KirillTenikov/CuZr
+  mddms_repository: https://github.com/KirillTenikov/CuZr-MD-DMS
+
+potential:
+  main: MACE
+  label: MACE_C
+
+system:
+  natoms: 4000
+  temperature_K: 300
+
+mddms:
+  strain_amplitude: 0.01
+  periods_ps: [20.0, 50.0]
+  cycles: 6
+  timestep_ps: 0.001
+
+seeds: [42, 43]
+
+compositions:
+  - name: Cu36Zr64
+    cu_fraction: 0.36
+    role: Zr-rich
+
+  - name: Cu50Zr50
+    cu_fraction: 0.50
+    role: equiatomic
+
+  - name: Cu64Zr36
+    cu_fraction: 0.64
+    role: Paper 2 baseline
+
+  - name: Cu70Zr30
+    cu_fraction: 0.70
+    role: Cu-rich

@@ -1,0 +1,29 @@
+# Runtime data
+runs/
+outputs/
+logs/
+checkpoints/
+
+# Large simulation files
+*.dump
+*.dump.gz
+*.lammpstrj
+*.lammpstrj.gz
+*.restart
+*.data
+*.xtc
+*.dcd
+*.xyz
+*.extxyz
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+.env
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
