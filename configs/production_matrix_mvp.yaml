@@ -33,7 +33,4 @@ compositions:
   - name: Cu64Zr36
     cu_fraction: 0.64
     role: Paper 2 baseline
-
-  - name: Cu70Zr30
-    cu_fraction: 0.70
-    role: Cu-rich
+  
