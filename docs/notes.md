@@ -6,7 +6,7 @@ The first goal is not to change the MD-DMS protocol, but to reuse the Paper 2 pr
 
 Main MVP comparison:
 
-Cu36Zr64 → Cu50Zr50 → Cu64Zr36 → Cu70Zr30
+Cu36Zr64 → Cu50Zr50 → Cu64Zr36
 
 Primary observables:
 
