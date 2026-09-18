@@ -28,8 +28,11 @@ __pycache__/
 .vscode/
 .idea/
 # Downloaded simulation results / archives
+
 results/
 archives/
+submission/
+
 *.tar.gz
 *.tgz
 *.zip

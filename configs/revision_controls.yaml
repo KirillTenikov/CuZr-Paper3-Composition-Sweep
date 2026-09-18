@@ -1,0 +1,85 @@
+project: CuZr-Paper3-Composition-Sweep
+campaign: paper3_revision_controls
+
+infrastructure:
+  mddms_repository: https://github.com/KirillTenikov/CuZr-MD-DMS
+  generic_runner: scripts/run/mddms_branch_runner.py
+  historical_generator: scripts/run/run_mddms_pilot.py
+  required_mddms_branch: refactor/generic-mddms-branch-runner
+
+baseline:
+  composition: Cu50Zr50
+  cu_fraction: 0.50
+  density_g_cm3: 7.20
+  seed: 42
+  potential: MACE_C
+  model_alias: mace_c
+  natoms: 4000
+  temperature_K: 300
+  timestep_ps: 0.001
+  strain_amplitude: 0.01
+  tdamp_ps: 0.1
+  pdamp_ps: 1.0
+  cycles: 6
+  stress_sign: -1.0
+  checkpoint_every_steps: 10000
+  dump_every_steps: 1000
+  start_mode: data-recreate-velocities
+
+controls:
+  - id: L1
+    purpose: linearity_check_P20
+    parent: existing_Cu50Zr50_seed42_stage02
+    period_ps: 20.0
+    strain_amplitude: 0.005
+    tdamp_ps: 0.1
+    start_mode: data-recreate-velocities
+
+  - id: L2
+    purpose: linearity_check_P50
+    parent: existing_Cu50Zr50_seed42_stage02
+    period_ps: 50.0
+    strain_amplitude: 0.005
+    tdamp_ps: 0.1
+    start_mode: data-recreate-velocities
+
+  - id: T1
+    purpose: thermostat_sensitivity
+    parent: existing_Cu50Zr50_seed42_stage02
+    period_ps: 20.0
+    strain_amplitude: 0.01
+    tdamp_ps: 1.0
+    start_mode: data-recreate-velocities
+
+  - id: V1
+    purpose: preserve_equilibrated_velocities
+    parent: existing_Cu50Zr50_seed42_stage02
+    period_ps: 20.0
+    strain_amplitude: 0.01
+    tdamp_ps: 0.1
+    start_mode: restart-preserve-velocities
+
+  - id: P1_prepare
+    purpose: longer_melt_preparation_control
+    composition: Cu50Zr50
+    cu_fraction: 0.50
+    density_g_cm3: 7.20
+    seed: 42
+    melt_ps: 100.0
+    quench_rate_K_per_ps: 135.0
+    relax_ps: 50.0
+    equilibrate_ps: 50.0
+
+  - id: P1_branch
+    purpose: mechanical_response_after_longer_melt
+    parent: P1_prepare_stage02
+    period_ps: 20.0
+    strain_amplitude: 0.01
+    tdamp_ps: 0.1
+    start_mode: data-recreate-velocities
+
+notes:
+  - The original 12-run production matrix remains unchanged and is not overwritten by this file.
+  - L1, L2, T1 and V1 reuse the same Stage-02 Cu50Zr50 seed42 parent state so only the intended Stage-03 control changes.
+  - P1 is the only control that intentionally changes glass preparation.
+  - No frequency sweep or third-realization composition matrix is included in the initial revision campaign.
