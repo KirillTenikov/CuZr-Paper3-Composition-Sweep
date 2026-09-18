@@ -5,7 +5,6 @@ infrastructure:
   mddms_repository: https://github.com/KirillTenikov/CuZr-MD-DMS
   generic_runner: scripts/run/mddms_branch_runner.py
   historical_generator: scripts/run/run_mddms_pilot.py
-  required_mddms_branch: refactor/generic-mddms-branch-runner
 
 baseline:
   composition: Cu50Zr50
@@ -82,4 +81,5 @@ notes:
   - The original 12-run production matrix remains unchanged and is not overwritten by this file.
   - L1, L2, T1 and V1 reuse the same Stage-02 Cu50Zr50 seed42 parent state so only the intended Stage-03 control changes.
   - P1 is the only control that intentionally changes glass preparation.
+  - The generic runner is expected to be present in the checked-out CuZr-MD-DMS repository; no paper-specific development branch is required.
   - No frequency sweep or third-realization composition matrix is included in the initial revision campaign.

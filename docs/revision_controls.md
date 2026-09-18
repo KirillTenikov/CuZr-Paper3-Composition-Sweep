@@ -4,14 +4,25 @@ This revision campaign is intentionally small. The original 12-run composition m
 
 ## Required MD-DMS code
 
-Use branch:
+Use a checked-out version of:
 
 ```text
 KirillTenikov/CuZr-MD-DMS
-refactor/generic-mddms-branch-runner
 ```
 
-The historical `run_mddms_pilot.py` and `paper2_revision_runner.py` remain available. The new `mddms_branch_runner.py` reuses their tested functionality instead of duplicating it.
+that contains:
+
+```text
+scripts/run/mddms_branch_runner.py
+```
+
+No Paper-3-specific development branch is required. The historical `run_mddms_pilot.py` and `paper2_revision_runner.py` remain available. The generic `mddms_branch_runner.py` reuses their tested functionality instead of duplicating it.
+
+Before production use, run the generic-runner regression tests from the `CuZr-MD-DMS` repository root:
+
+```bash
+python -m unittest tests/test_mddms_branch_runner.py -v
+```
 
 ## Common parent
 
@@ -121,6 +132,8 @@ python scripts/run/mddms_branch_runner.py prepare \
   --mddms-cycles 6
 ```
 
+The generated Stage-02 branchpoint manifest records the effective preparation protocol copied from the generator metadata, including the 100 ps melt and derived step counts. `metadata.json` remains the authoritative generator record.
+
 Then branch one normal historical-style P20 MD-DMS trajectory from the newly prepared parent:
 
 ```bash
@@ -145,4 +158,4 @@ python scripts/run/mddms_branch_runner.py branch \
 
 ## Provenance rule
 
-Do not overwrite old production directories. Every control gets a new run directory, `metadata.json`, parent metadata, branch manifest, checkpoint manifest, preserved generated Stage-03 input, and checkpoint/resume support. The original Paper 3 production YAML remains the historical description of the 12-run matrix.
+Do not overwrite old production directories. Every control gets a new run directory, `metadata.json`, parent metadata, branch manifest, checkpoint manifest, preserved generated Stage-03 input, and checkpoint/resume support. Newly prepared Stage-02 parents also record their effective preparation settings in `stage02_branchpoint.json`. The original Paper 3 production YAML remains the historical description of the 12-run matrix.

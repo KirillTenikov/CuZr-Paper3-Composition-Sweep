@@ -44,10 +44,10 @@ Production and control calculations use the shared repository:
 KirillTenikov/CuZr-MD-DMS
 ```
 
-For the revision campaign, the development branch is:
+The checked-out MD-DMS repository must contain:
 
 ```text
-refactor/generic-mddms-branch-runner
+scripts/run/mddms_branch_runner.py
 ```
 
-It adds `scripts/run/mddms_branch_runner.py` while retaining the historical `run_mddms_pilot.py` and `paper2_revision_runner.py` workflows. The generic runner defaults to the historical Stage-03 start semantics and adds an explicit restart-preserving velocity control.
+No Paper-3-specific development branch is required. The generic runner coexists with the historical `run_mddms_pilot.py` and `paper2_revision_runner.py` workflows. Its default Stage-03 start mode preserves the historical data-file/velocity-recreation semantics, while an explicit restart-preserving mode is available for the V1 control.
